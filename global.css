@@ -1,0 +1,146 @@
+/* ======================================================= */
+/* 1. VARIABLES CSS (Recomendado para coherencia de color) */
+/* ======================================================= */
+/* Si usaste variables en tu style.css, asegúrate de incluirlas aquí o en otro archivo base */
+:root {
+    --color-cafe: #A0522D; /* Color usado en el Index */
+    --color-oscuro: #222;  /* Color del fondo del flip button */
+}
+
+/* ======================================================= */
+/* 2. ESTILOS DEL MENÚ MULTINIVEL (GLOBAL)                 */
+/* ======================================================= */
+.dropdown-item-hover {
+    position: relative;
+    list-style: none;
+    padding: 0; 
+}
+.submenu-right {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 200px;
+    z-index: 20;
+    margin-top: 0;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+@media (min-width: 992px) {
+    /* Muestra el menú principal con hover */
+    .menu-multinivel:hover > .dropdown-menu {
+        display: block;
+    }
+    /* Muestra y posiciona el submenú lateralmente con hover */
+    .dropdown-item-hover:hover > .submenu-right {
+        display: block;
+        margin-top: -0.5rem; 
+        margin-left: 0.1rem;
+        position: absolute;
+        left: 100%; 
+        top: 0;
+    }
+    /* Estilo de hover para los enlaces */
+    .dropdown-menu .dropdown-item-hover:hover > .sub-menu-trigger {
+        background-color: var(--bs-dropdown-link-hover-bg, #495057);
+    }
+}
+
+@media (max-width: 991.98px) {
+    /* MÓVIL: Los submenús se apilan hacia abajo */
+    .submenu-right {
+        position: static;
+        left: auto;
+        top: auto;
+        width: 100%;
+        padding-left: 20px; /* Indentación */
+    }
+    
+    /* En móvil, se oculta el submenú en hover (usamos el click de Bootstrap) */
+    .dropdown-item-hover:hover > .submenu-right {
+        display: none; 
+    }
+    
+    .dropdown-menu .dropdown-item-hover {
+        padding: 0;
+    }
+    .dropdown-menu .dropdown-item-hover .dropdown-item {
+        padding-left: 1.5rem;
+    }
+}
+
+/* ======================================================= */
+/* 3. ESTILOS DEL BOTÓN DEL NAVBAR (EFECTO FLIP) - GLOBAL  */
+/* (Limpiado de prefijos obsoletos y corrección de posición) */
+/* ======================================================= */
+.flip {
+    position: relative; /* CLAVE: Ahora es relativo para que Flexbox de Bootstrap lo posicione */
+    width: 160px;
+    height: 48px;
+    perspective: 500px;
+    margin: 0; /* Aseguramos que no tenga márgenes que lo saquen de la nav */
+}
+.flip a {
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translateZ(-25px);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.flip a .front,
+.flip a .back {
+    margin: 0;
+    width: 160px;
+    height: 48px;
+    line-height: 48px;
+    position: absolute;
+    text-align: center;
+    letter-spacing: 0.4em;
+}
+.flip a .front {
+    background-color: var(--color-oscuro);
+    color: #fff;
+    transform: rotateY(0) translateZ(24px);
+}
+.flip a .back {
+    background-color: rgba(255,255,255,0);
+    color: rgba(34,34,34,0);
+    transform: rotateX(90deg) translateZ(24px);
+    overflow: hidden;
+}
+.flip a .back:after {
+    content: '';
+    position: absolute;
+    top: -32%;
+    left: -10%;
+    width: 120%;
+    height: 50%;
+    background: var(--color-oscuro);
+    transform: rotate(8deg);
+    transition: all 0.5s ease;
+    transition-delay: 0.15s;
+}
+.flip a:hover {
+    transform: translateZ(-24px) rotateX(-90deg);
+}
+.flip a:hover .front {
+    background: #000;
+    transition: all 0.8s ease;
+}
+.flip a:hover .back {
+    color: var(--color-oscuro);
+    transition: color 0.4s linear;
+    background: #fff;
+}
+.flip a:hover .back:after {
+    transform: rotate(6deg) translate(100px, -18px);
+}

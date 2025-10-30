@@ -1,0 +1,72 @@
+/* ======================================================= */
+/* ESTILOS ESPECÍFICOS DE sobreNosotros.html (Layout y Colores) */
+/* ======================================================= */
+
+.contenedor-sobre-nosotros h1 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    color: chocolate; /* Color del título */
+}
+
+/* El contenedor principal de las secciones de texto/imagen */
+.contenido-textos {
+    width: 100%;
+    display: flex;
+    padding: 0px 8%; 
+    align-items: center;
+    flex-direction: column;
+}
+
+/* === SOLUCIÓN RESPONSIVE Y DE MARGENES === */
+
+/* MOBILE FIRST: Estilos para dispositivos pequeños (por defecto) */
+.contenedores {
+    display: flex;
+    flex-direction: column; /* Apila en móvil: imagen arriba, texto abajo */
+    margin-bottom: 40px; /* Espacio entre la sección Historia y Productos */
+    width: 100%;
+    padding: 0 10px; /* Un poco de margen interior para el contenido en móvil */
+}
+
+.contenedores img {
+    width: 100%;
+    height: auto;
+    margin: 0 0 20px 0; /* Margen inferior para separar la imagen del texto */
+    max-width: 500px; /* Límite para que la imagen no sea gigante en tablets */
+    align-self: center; /* Centra la imagen */
+}
+
+/* MEDIA QUERY para Escritorio (992px y más) */
+@media (min-width: 992px) {
+    .contenedores {
+        flex-direction: row; /* Vuelve al layout horizontal */
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0; /* Quitar el padding en escritorio */
+    }
+
+    /* Estilos generales para los contenedores en escritorio */
+    .contenedores > div {
+        width: 60%; /* El texto ocupa el 60% */
+    }
+    .contenedores img {
+        width: 40%; /* La imagen ocupa el 40% */
+        margin-bottom: 0;
+        margin-left: 0; /* Reset */
+        margin-right: 0; /* Reset */
+    }
+
+    /* 1. SECCIÓN: IMAGEN A LA IZQUIERDA (barista1.jpg) */
+    .contenedores:nth-child(1) img {
+        margin-right: 30px; /* CLAVE: Espacio a la derecha de la imagen */
+    }
+
+    /* 2. SECCIÓN: IMAGEN A LA DERECHA (latteart.jpg) */
+    .contenedores:nth-child(2) {
+        /* Orden normal (Texto, Imagen). NO USAMOS row-reverse. */
+    }
+    .contenedores:nth-child(2) img {
+        margin-left: 30px; /* CLAVE: Espacio a la izquierda de la imagen (separándola del texto) */
+    }
+}
