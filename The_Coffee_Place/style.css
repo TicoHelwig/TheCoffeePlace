@@ -1,0 +1,256 @@
+/* ======================================================= */
+/* 1. ESTILOS DE COMPONENTES DE HOME (BANNER Y BLOQUE)  */
+/* ======================================================= */
+
+.bannerHome {
+    background-image: url("img/granos-home-2000.jpg");
+    height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
+}
+
+.bannerHome p {
+    font-size: 20px;
+}
+
+.bannerHome a {
+    /* Estilo del botón interno del banner */
+    background-color: black;
+    color: var(--color-cafe);
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid var(--color-cafe);
+}
+
+.bloqueImperativo {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+}
+
+.bloqueImperativo div {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+}
+
+.bloqueImperativo div h2 {
+    color: black;
+}
+
+/* ======================================================= */
+/* 2. ESTILOS DEL BOTÓN DEL NAVBAR (EFECTO FLIP) */
+/* (Se simplifican los prefijos de navegador innecesarios) */
+/* ======================================================= */
+.flip {
+    /* Corregido a posición relativa y márgenes para integración en el navbar */
+    position: relative; 
+    width: 160px;
+    height: 48px;
+    perspective: 500px;
+    margin: 0; 
+}
+.flip a {
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: translateZ(-25px);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.flip a .front,
+.flip a .back {
+    margin: 0;
+    width: 160px;
+    height: 48px;
+    line-height: 48px;
+    position: absolute;
+    text-align: center;
+    letter-spacing: 0.4em;
+}
+.flip a .front {
+    background-color: var(--color-oscuro);
+    color: #fff;
+    transform: rotateY(0) translateZ(24px);
+}
+.flip a .back {
+    background-color: rgba(255,255,255,0);
+    color: rgba(34,34,34,0);
+    transform: rotateX(90deg) translateZ(24px);
+    overflow: hidden;
+}
+.flip a .back:after {
+    content: '';
+    position: absolute;
+    top: -32%;
+    left: -10%;
+    width: 120%;
+    height: 50%;
+    background: var(--color-oscuro);
+    transform: rotate(8deg);
+    transition: all 0.5s ease;
+    transition-delay: 0.15s;
+}
+.flip a:hover {
+    transform: translateZ(-24px) rotateX(-90deg);
+}
+.flip a:hover .front {
+    background: #000;
+    transition: all 0.8s ease;
+}
+.flip a:hover .back {
+    color: var(--color-oscuro);
+    transition: color 0.4s linear;
+    background: #fff;
+}
+.flip a:hover .back:after {
+    transform: rotate(6deg) translate(100px, -18px);
+}
+
+/* ======================================================= */
+/* 3. ESTILOS DEL MENÚ MULTINIVEL (COMPARTIDO) */
+/* ======================================================= */
+
+/* Estilos base del elemento que contendrá el submenú */
+.dropdown-item-hover {
+    position: relative;
+    list-style: none;
+    padding: 0; 
+}
+
+/* Estilos base del submenú oculto por defecto */
+.submenu-right {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    width: 200px;
+    z-index: 20;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+@media (min-width: 992px) {
+    /* Escritorio: Mantiene el menú principal abierto con hover */
+    .menu-multinivel:hover > .dropdown-menu {
+        display: block;
+    }
+
+    /* Escritorio: Muestra y posiciona el submenú lateralmente con hover */
+    .dropdown-item-hover:hover > .submenu-right {
+        display: block;
+        margin-top: -0.5rem; 
+        margin-left: 0.1rem;
+        position: absolute;
+        left: 100%; 
+        top: 0;
+    }
+
+    /* Estilo de hover para los enlaces */
+    .dropdown-menu .dropdown-item-hover:hover > .sub-menu-trigger {
+        background-color: var(--bs-dropdown-link-hover-bg, #495057);
+    }
+}
+
+@media (max-width: 991.98px) {
+    /* MÓVIL: Los submenús se apilan hacia abajo (sobrescribe el posicionamiento absoluto) */
+    .submenu-right {
+        position: static !important;
+        left: auto;
+        top: auto;
+        width: 100%;
+        padding-left: 20px; /* Indentación */
+    }
+    
+    /* En móvil, el submenú se oculta para abrirse con el click de Bootstrap */
+    .dropdown-item-hover:hover > .submenu-right {
+        display: none; 
+    }
+
+    /* Estilos de padding para móvil */
+    .dropdown-menu .dropdown-item-hover {
+        padding: 0;
+    }
+    .dropdown-menu .dropdown-item-hover .dropdown-item {
+        padding-left: 1.5rem;
+    }
+}
+
+/* ======================================================= */
+/* 2. ESTILOS DEL CARRUSEL Y OTROS ELEMENTOS DEL BODY      */
+/* ======================================================= */
+
+.carousel-inner .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.carousel-inner .card {
+    height: 100%;
+}
+
+.carousel-item:nth-child(3) .row {
+    justify-content: center;
+}
+
+/* Estilos de la página "Sobre Nosotros" (si aplica) */
+
+.contenedor-sobre-nosotros h1 {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    color: var(--color-cafe); /* Usa la variable CSS */
+}
+
+.contenido-textos {
+    width: 100%;
+    display: flex;
+    padding: 0px 8%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contenedores {
+    display: flex;
+    height: 100%;
+}
+
+.contenedores img {
+    width: 40%;
+    height: auto;
+    margin-right: 20px;
+}
+
+/* ======================================================= */
+/* CORRECCIÓN DE ALINEACIÓN DE CARDS DE PRODUCTOS (#prod)  */
+/* ======================================================= */
+
+/* Aplica Flexbox a cada columna dentro de la fila de productos (#prod) */
+#prod > div {
+    display: flex;
+    /* Esto es CLAVE: fuerza a la columna a estirarse a la altura máxima */
+    align-items: stretch; 
+}
+
+#prod .card {
+    /* Esto es CLAVE: la tarjeta toma la altura completa de la columna estirada */
+    height: 100%;
+}
